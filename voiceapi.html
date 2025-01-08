@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceAPI</title>
+    <script src="Voice.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        select,
+        input,
+        button,
+        a {
+            margin: 10px 0;
+            display: block;
+        }
+        #download-link {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Azure TTS</h1>
+    <textarea id="text-input" placeholder="輸入文字">Hello, welcome to Azure TTS!</textarea>
+    <select id="voice-model">
+        <option value="en-US-JennyNeural">Jenny (English)</option>
+        <option value="en-US-GuyNeural">Guy (English)</option>
+    </select>
+    <label>
+        速率:
+        <input type="number" id="rate" value="1.0" step="0.1" min="0.5" max="2.0">
+    </label>
+    <label>
+        音高:
+        <input type="number" id="pitch" value="0" step="0.1" min="-5" max="5">
+    </label>
+    <button id="generate-btn" title="點擊生成語音">生成語音</button>
+    <a id="download-link" download="output.mp3" style="display: none;">下載語音</a>
+</body>
+
+</html>
