@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('generate-btn').addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
-        const rate = document.getElementById('rate').value || "0%";
-        const pitch = document.getElementById('pitch').value || "0%";
+        const rate = `${document.getElementById('rate').value || 0}%`;
+        const pitch = `${document.getElementById('pitch').value || 0}%`;
 
         if (!text) {
             alert('請輸入文字');
@@ -25,16 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('https://eastus.tts.speech.microsoft.com/cognitiveservices/v1', {
                 method: 'POST',
                 headers: {
-                    'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46',
+                    'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46', // 替換為有效 API Key
                     'Content-Type': 'application/ssml+xml',
-                    'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+                    'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3', // 嘗試不同格式
                 },
                 body: ssml,
             });
 
             if (!response.ok) {
                 const errorDetails = await response.text();
-                console.error('Azure API Response:', errorDetails); // 打印 Azure 返回錯誤訊息
+                console.error('Azure API Response:', errorDetails); // 打印完整返回錯誤訊息
                 throw new Error(`語音生成失敗，錯誤信息: ${errorDetails}`);
             }
 
