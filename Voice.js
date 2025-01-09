@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const voiceModel = document.getElementById('voice-model').value;
         const rate = `${parseFloat(rateInput.value)*1 || 0}%`;
         const pitch = `${parseFloat(pitchInput.value)*1 || 0}%`;
-
+        console.log("選擇速率: "+ rate, "選擇音高: "+ pitch);
 
         if (!text) {
             alert('請輸入文字');
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadLink.textContent = '下載語音';
 
             alert('語音已生成，請下載！');
-            console.log(rate, pitch);
+            console.log("生成速率: "+ rate, "生成音高: "+ pitch);
         } catch (error) {
             console.error(error);
             alert(`生成過程出現錯誤：${error.message}`);
