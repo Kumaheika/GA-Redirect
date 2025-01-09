@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     generateBtn.addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
-        const rate = `${parseFloat(rateInput.value) * 100}%`;
-        const pitch = `${parseFloat(pitchInput.value) * 100}%`;
+        const rate = `${parseFloat(rateInput.value)}%`;
+        const pitch = `${parseFloat(pitchInput.value)}%`;
 
         if (!text) {
             alert('請輸入文字');
