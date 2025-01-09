@@ -9,17 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle button clicks
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            // Set active button styling
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            // Update rate and pitch inputs
             const rate = button.dataset.rate;
             const pitch = button.dataset.pitch;
             rateInput.value = rate;
             pitchInput.value = pitch;
 
-            // Show or hide custom controls
             if (button.textContent === '專家操作') {
                 customControls.style.display = 'block';
             } else {
@@ -32,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     generateBtn.addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
-        const rate = `${rateInput.value}`;
-        const pitch = `${pitchInput.value}`;
+        const rate = `${parseFloat(rateInput.value) * 100}%`;
+        const pitch = `${parseFloat(pitchInput.value) * 100}%`;
 
         if (!text) {
             alert('請輸入文字');
@@ -54,13 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46',
                     'Content-Type': 'application/ssml+xml',
-                    'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+                    'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
                 },
                 body: ssml,
             });
 
             if (!response.ok) {
                 const errorDetails = await response.text();
+                console.error('Azure API Response:', errorDetails);
                 throw new Error(`語音生成失敗: ${errorDetails}`);
             }
 
@@ -71,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             alert('語音已生成，請下載！');
         } catch (error) {
+            console.error(error);
             alert(`生成過程出現錯誤：${error.message}`);
         }
     });
