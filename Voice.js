@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rate = `${parseFloat(rateInput.value)*1 || 0}%`;
         const pitch = `${parseFloat(pitchInput.value)*1 || 0}%`;
 
-        console.log(rate, pitch);
 
         if (!text) {
             alert('請輸入文字');
@@ -70,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadLink.textContent = '下載語音';
 
             alert('語音已生成，請下載！');
+            console.log(rate, pitch);
         } catch (error) {
             console.error(error);
             alert(`生成過程出現錯誤：${error.message}`);
