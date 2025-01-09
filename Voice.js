@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rate = `${parseFloat(rateInput.value)*1 || 0}%`;
         const pitch = `${parseFloat(pitchInput.value)*1 || 0}%`;
 
+        console.log(rate, pitch);
+
         if (!text) {
             alert('請輸入文字');
             return;
