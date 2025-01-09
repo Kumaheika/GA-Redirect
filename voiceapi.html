@@ -62,9 +62,11 @@
 
         #download-link {
             display: none;
+            max-width: 150px;
             margin-top: 20px;
             text-decoration: none;
             color: #007BFF;
+            background-color: #E1E1E1;
         }
     </style>
 </head>
@@ -73,7 +75,11 @@
     <h1>Voice TTS System</h1>
 
     <!-- Text and Voice Selection -->
-    <textarea id="text-input" placeholder="輸入文字">Hi~歡迎來到 VDU 語音系統 4.38 檢修版</textarea>
+    <textarea id="text-input" placeholder="輸入文字">
+        Hi! 歡迎來到 VDU 語音系統 V5.0版!
+    </textarea>
+
+    <h3>參數選項</h3>
     <select id="voice-model">
         <option value="zh-TW-HsiaoChenNeural">女性 Xiaoxiao(中英文推薦)</option>
         <option value="zh-TW-YunJheNeural">男性 Yunyang (中英文推薦)</option>
@@ -86,10 +92,9 @@
         <button class="preset-button" data-rate="1.1" data-pitch="0">微學習</button>
         <button class="preset-button" data-rate="1.08" data-pitch="0">服務行銷</button>
         <button class="preset-button" data-rate="1.04" data-pitch="0">產品介紹</button>
-        <button class="preset-button" data-rate="100" data-pitch="0">事項宣導(超加速)</button>
+        <button class="preset-button" data-rate="100" data-pitch="0">事項宣導 (超加速)</button>
         <button class="preset-button" data-rate="1" data-pitch="0">專家操作</button>
     </div>
-
     <!-- Custom Controls -->
     <div id="custom-controls">
         <label>
@@ -102,9 +107,10 @@
         </label>
     </div>
 
+    <hr>
     <!-- Generate and Download -->
     <button id="generate-btn">生成語音</button>
-    <a id="download-link" download="output.mp3">下載語音</a>
+    <a id="download-link" download="output.mp3">點按下載語音</a>
 
     <script src="Voice.js"></script>
 </body>
