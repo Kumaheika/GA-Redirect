@@ -73,7 +73,7 @@
     <h1>Voice TTS System</h1>
 
     <!-- Text and Voice Selection -->
-    <textarea id="text-input" placeholder="輸入文字">Hi~歡迎來到 VDU 語音系統 4.37 檢修版</textarea>
+    <textarea id="text-input" placeholder="輸入文字">Hi~歡迎來到 VDU 語音系統 4.38 檢修版</textarea>
     <select id="voice-model">
         <option value="zh-TW-HsiaoChenNeural">女性 Xiaoxiao(中英文推薦)</option>
         <option value="zh-TW-YunJheNeural">男性 Yunyang (中英文推薦)</option>
@@ -86,7 +86,7 @@
         <button class="preset-button" data-rate="1.1" data-pitch="0">微學習</button>
         <button class="preset-button" data-rate="1.08" data-pitch="0">服務行銷</button>
         <button class="preset-button" data-rate="1.04" data-pitch="0">產品介紹</button>
-        <button class="preset-button" data-rate="200" data-pitch="0">事項宣導(超加速)</button>
+        <button class="preset-button" data-rate="100" data-pitch="0">事項宣導(超加速)</button>
         <button class="preset-button" data-rate="1" data-pitch="0">專家操作</button>
     </div>
 
@@ -94,11 +94,11 @@
     <div id="custom-controls">
         <label>
             速率:
-            <input type="range" id="rate" min="0.5" max="2.0" step="0.1" value="1.0">
+            <input type="range" id="rate" min="-100" max="100.0" step="0.1" value="1.0">
         </label>
         <label>
             音高:
-            <input type="range" id="pitch" min="-5" max="5" step="0.1" value="0">
+            <input type="range" id="pitch" min="-5" max="50" step="0.1" value="0">
         </label>
     </div>
 
