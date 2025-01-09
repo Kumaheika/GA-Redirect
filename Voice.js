@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Generated SSML:', ssml); // 確認 SSML 輸出是否正確
 
         try {
+            // API
             const response = await fetch('https://eastus.tts.speech.microsoft.com/cognitiveservices/v1', {
                 method: 'POST',
                 headers: {
