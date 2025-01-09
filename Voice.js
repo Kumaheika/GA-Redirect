@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             rateInput.value = rate;
             pitchInput.value = pitch;
 
+            console.log("選擇速率: "+ rateInput, "選擇音高: "+ pitchInput);
+
             if (button.textContent === '專家操作') {
                 customControls.style.display = 'block';
             } else {
@@ -29,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     generateBtn.addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
-        const rate = `${parseFloat(rateInput.value)*1 || 0}%`;
-        const pitch = `${parseFloat(pitchInput.value)*1 || 0}%`;
-        console.log("選擇速率: "+ rate, "選擇音高: "+ pitch);
+        const rate = `${parseFloat(rateInput.value)*1}%`;
+        const pitch = `${parseFloat(pitchInput.value)*1}%`;
+        
 
         if (!text) {
             alert('請輸入文字');
