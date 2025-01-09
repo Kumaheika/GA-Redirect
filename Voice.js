@@ -1,77 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const rateInput = document.getElementById('rate');
-    const pitchInput = document.getElementById('pitch');
-    const customControls = document.getElementById('custom-controls');
-    const buttons = document.querySelectorAll('.preset-button');
-    const generateBtn = document.getElementById('generate-btn');
-    const downloadLink = document.getElementById('download-link');
-
-    // Handle button clicks
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Set active button styling
-            buttons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            // Update rate and pitch inputs
-            const rate = button.dataset.rate;
-            const pitch = button.dataset.pitch;
-            rateInput.value = rate;
-            pitchInput.value = pitch;
-
-            // Show or hide custom controls
-            if (button.textContent === '專家操作') {
-                customControls.style.display = 'block';
-            } else {
-                customControls.style.display = 'none';
-            }
-        });
-    });
-
-    // Generate speech
-    generateBtn.addEventListener('click', async () => {
+    document.getElementById('generate-btn').addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
-        const rate = `${rateInput.value}`;
-        const pitch = `${pitchInput.value}`;
+        const rate = `${document.getElementById('rate').value || 0}%`;
+        const pitch = `${document.getElementById('pitch').value || 0}%`;
 
         if (!text) {
             alert('請輸入文字');
             return;
         }
 
+        // 構建 SSML
         const ssml = `
-          <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="zh-CN">
+          <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
             <voice name="${voiceModel}">
               <prosody rate="${rate}" pitch="${pitch}">${text}</prosody>
             </voice>
           </speak>
         `;
 
+        console.log('Generated SSML:', ssml); // 確認 SSML 輸出是否正確
+
         try {
+            // API
             const response = await fetch('https://eastus.tts.speech.microsoft.com/cognitiveservices/v1', {
                 method: 'POST',
                 headers: {
-                    'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46',
+                    'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46', // 替換為有效 API Key
                     'Content-Type': 'application/ssml+xml',
-                    'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+                    'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3', // 嘗試不同格式
                 },
                 body: ssml,
             });
 
             if (!response.ok) {
                 const errorDetails = await response.text();
-                throw new Error(`語音生成失敗: ${errorDetails}`);
+                console.error('Azure API Response:', errorDetails); // 打印完整返回錯誤訊息
+                throw new Error(`語音生成失敗，錯誤信息: ${errorDetails}`);
             }
 
             const blob = await response.blob();
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.style.display = 'block';
-            downloadLink.textContent = '下載語音';
+            if (!blob || blob.size === 0) {
+                throw new Error('生成的音訊文件為空，請檢查輸入或服務配置');
+            }
 
-            alert('語音已生成，請下載！');
+            const link = document.getElementById('download-link');
+            link.href = URL.createObjectURL(blob);
+            link.style.display = 'block';
+            link.textContent = '下載語音';
         } catch (error) {
-            alert(`生成過程出現錯誤：${error.message}`);
+            console.error(error);
+            alert('語音生成過程中出現錯誤：' + error.message);
         }
     });
 });
