@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Ocp-Apim-Subscription-Key': '10dfa1cba6834633896008d56229bc46',
                     'Content-Type': 'application/ssml+xml',
-                    'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
+                    'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
                 },
                 body: ssml,
             });
