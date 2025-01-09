@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const blob = await response.blob();
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.style.display = 'block';
-            downloadLink.textContent = '下載語音';
+            downloadLink.textContent = '點按下載語音';
 
             alert('語音已生成，請下載！');
             console.log("生成速率: "+ rate, "生成音高: "+ pitch);
