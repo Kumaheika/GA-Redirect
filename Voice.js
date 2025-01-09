@@ -1,10 +1,11 @@
-// Updated JavaScript for optimizing the TTS system
-
+// Updated JavaScript with requested fixes and improvements
 document.addEventListener('DOMContentLoaded', () => {
     const rateInput = document.getElementById('rate');
     const pitchInput = document.getElementById('pitch');
     const customControls = document.getElementById('custom-controls');
     const buttons = document.querySelectorAll('.preset-button');
+    const generateBtn = document.getElementById('generate-btn');
+    const downloadLink = document.getElementById('download-link');
 
     // Preset configurations for the 5 buttons
     const presets = [
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Generate speech based on current settings
-    document.getElementById('generate-btn').addEventListener('click', async () => {
+    generateBtn.addEventListener('click', async () => {
         const text = document.getElementById('text-input').value.trim();
         const voiceModel = document.getElementById('voice-model').value;
         const rate = `${rateInput.value || 0}`;
@@ -90,10 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('生成的音訊文件為空，請檢查輸入或服務配置');
             }
 
-            const link = document.getElementById('download-link');
-            link.href = URL.createObjectURL(blob);
-            link.style.display = 'block';
-            link.textContent = '下載語音';
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.style.display = 'block';
+            downloadLink.textContent = '下載語音';
+
+            // Add system prompt
+            alert('語音已生成！請點擊下載鏈接下載語音。');
         } catch (error) {
             console.error(error);
             alert('語音生成過程中出現錯誤：' + error.message);
